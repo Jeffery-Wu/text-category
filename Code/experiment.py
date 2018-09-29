@@ -202,7 +202,7 @@ def main(trainf, testf, algo="tf_idf", model="knn", knn_neighbour=0):
 
     init(package)
 
-    for k in [25, 50, 75, 150, 300, 600, 900, 1200, 1800, 2400]:
+    for k in [600, 900, 1200, 1800, 2400]:
 
         package["weights"] = {}
 
@@ -284,13 +284,13 @@ if __name__ == "__main__":
 
     # main(trainf, testf, algo="tf_idf", model="svm")
     # main(trainf, testf, algo="tf_dc", model="svm")
-    # main(trainf, testf, algo="tf_bdc", model="svm")
-    # main(trainf, testf, algo="iqf_qf_icf", model="svm")
+    main(trainf, testf, algo="tf_bdc", model="svm")
+    main(trainf, testf, algo="iqf_qf_icf", model="svm")
     # main(trainf, testf, algo="tf_rf", model="svm")
     main(trainf, testf, algo="tf_chi", model="svm")
-    # main(trainf, testf, algo="tf_eccd", model="svm")
-    # main(trainf, testf, algo="tf_mrf", model="svm")
-    # main(trainf, testf, algo="tf_nrf", model="svm")
+    main(trainf, testf, algo="tf_eccd", model="svm")
+    main(trainf, testf, algo="tf_mrf", model="svm")
+    main(trainf, testf, algo="tf_nrf", model="svm")
     # main(trainf, testf, algo="tf_vc", model="svm")
 
     # knn_neighbour 选用 1-35之间MicroF1即准确率最高的

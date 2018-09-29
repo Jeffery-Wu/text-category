@@ -11,7 +11,7 @@ import math
 import numpy as np
 
 
-def tf_bdc(corpus, test, package):
+def tf_vc(corpus, test, package):
     labelset = package["labelset"]
     weights = package["weights"]
     voca = package["voca"]
@@ -49,14 +49,19 @@ def tf_bdc(corpus, test, package):
             # print len(hlist)
             for cate in range(len(labelset)):
                 if word in dictlist[labelset[cate]]:
-                    hlist[cate] = dictlist[labelset[cate]][word] * 1.0 / doclen[labelset[cate]]
-            hlist = hlist / np.sum(hlist)
+                    hlist[cate] = dictlist[labelset[cate]][word]
 
-            for i in range(len(hlist)):
-                if abs(hlist[i] - 0.0) < 1e-5:  # 为避免log0  故将0转化为1 取log1=0
-                    hlist[i] = 1
+            var = np.var(hlist)
 
-            weights[word] = 1.0 + (np.sum(hlist * np.log2(hlist))) / (math.log(len(labelset), 2))
+            # for i in range(len(hlist)):
+            #     if abs(hlist[i] - 0.0) < 1e-5:  # 为避免log0  故将0转化为1 取log1=0
+            #
+            #         hlist[i] = 1
+
+            weights[word] = np.log2(1 + var)
+
+    # weights = sorted(weights.items(), key=lambda x: x[1], reverse=True)
+    # print(weights)
 
     # 计算 tf-dc 值
     for i in dictlist:

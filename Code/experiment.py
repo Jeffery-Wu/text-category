@@ -9,6 +9,8 @@ import math
 
 import psutil as psutil
 
+from tf_vc import tf_vc
+
 os.environ["TF_CPP_MIN_LOG_LEVEL"] = "3"
 import numpy as np
 import pandas as pd
@@ -111,6 +113,8 @@ def getXY(input, algo, model, test=0, k=25):
     elif algo == "tf_nrf":
         weights = tf_nrf(corpus, test, package)
         level = 3
+    elif algo == "tf_vc":
+        weights = tf_vc(corpus, test, package)
 
     # print weights
     X = []
@@ -268,25 +272,26 @@ if __name__ == "__main__":
     # trainf = "../Corpus/Reuters_train_1.txt"
 
     # 路透
-    # trainf = "../Corpus/Reuters_train.txt"
-    # testf = "../Corpus/Reuters_test.txt"
+    trainf = "../Corpus/Reuters_train.txt"
+    testf = "../Corpus/Reuters_test.txt"
 
     # trainf = "../Corpus/Reuters_test.txt"
 
 
     # 20 newsgroup
-    trainf = "../Corpus/20_newsgroup_train.txt"
-    testf = "../Corpus/20_newsgroup_test.txt"
+    # trainf = "../Corpus/20_newsgroup_train.txt"
+    # testf = "../Corpus/20_newsgroup_test.txt"
 
-    main(trainf, testf, algo="tf_idf", model="svm")
+    # main(trainf, testf, algo="tf_idf", model="svm")
     # main(trainf, testf, algo="tf_dc", model="svm")
     # main(trainf, testf, algo="tf_bdc", model="svm")
     # main(trainf, testf, algo="iqf_qf_icf", model="svm")
     # main(trainf, testf, algo="tf_rf", model="svm")
-    # main(trainf, testf, algo="tf_chi", model="svm")
+    main(trainf, testf, algo="tf_chi", model="svm")
     # main(trainf, testf, algo="tf_eccd", model="svm")
     # main(trainf, testf, algo="tf_mrf", model="svm")
     # main(trainf, testf, algo="tf_nrf", model="svm")
+    # main(trainf, testf, algo="tf_vc", model="svm")
 
     # knn_neighbour 选用 1-35之间MicroF1即准确率最高的
     # main(trainf, testf, algo="tf_idf", model="knn", knn_neighbour=30)
